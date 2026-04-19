@@ -1,18 +1,17 @@
-import env from "dotenv";
-import axios from "axios";
 
-env.config();
 export const GetLatLon = async (body)=>{
-const geoAPI_URL = "http://api.openweathermap.org/geo/1.0/direct";
-const geokey = import.meta.env.api_key;
+const API_Url = import.meta.env.VITE_BACKEND_URL;
 
 try{
-    const geocode = await axios.get(geoAPI_URL,{
-        params:{
-            q:body.location,
-            appid:geokey,
-        }
-    });
+    fetch(API_Url,{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            location:body,
+        })
+    })
     const response = JSON.stringify(geocode.data);
     console.log(response);
     const result = (geocode.data);

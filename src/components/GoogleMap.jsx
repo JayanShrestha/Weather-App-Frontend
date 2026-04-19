@@ -1,22 +1,33 @@
-import {APIProvider, Map, Pin} from '@vis.gl/react-google-maps';
-
-const GoogleMap = ({className, id, ...props})=>{
+import {APIProvider, Map, Marker} from '@vis.gl/react-google-maps';
+import useLocation from './Hooks/getLocation';
+const GoogleMap = ()=>{
     const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
-    return(
-        <div className={`relative h-80 bg-gradient-to-br from-slate-200/50 to-slate-300/30 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/30 ${className}` } id={id} {...props}>
-        
-                 <APIProvider apiKey={apiKey} onLoad={() => console.log('Maps API has loaded.')}>
+    const {latlng} = useLocation();
+    const fallbackCenter = { lat: -33.860664, lng: 151.208138 };
+    const isLoading = !latlng;
+    return (
+<>
+  <p>Current Location</p>
+  {isLoading && (
+        <div className="relative inset-0 flex items-center justify-center z-20 bg-transparent">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-400 border-t-transparent"></div>
+        </div>
+      )}
+  <APIProvider apiKey={apiKey} onLoad={() => console.log('Maps API has loaded.')}>
+  
    <Map
-      defaultZoom={13}
-      defaultCenter={ { lat: -33.860664, lng: 151.208138 } }
-      className='w-96 h-full mx-auto mt-5'
+      defaultZoom={16}
+      center={ latlng || fallbackCenter}
+      className='w-full h-64 p-5 mx-auto border-none rounded-2xl z-0'
       onCameraChanged={ (ev) =>
         console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)
       }>
+        <Marker position={latlng}
+        title= "Your Location"
+        />
    </Map>
-   <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
  </APIProvider>
- </div>
+ </>
             
     )
 }

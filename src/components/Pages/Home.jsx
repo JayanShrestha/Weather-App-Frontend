@@ -11,10 +11,10 @@ function Home() {
    <>
    <Header/>
    <InputArea/>
-   <Card className={`px-5 py-10`}>
+   <Card className="lg:w-[50%]">
     <GoogleMap />
    </Card>
-   
+    
    </>
   )
 }
