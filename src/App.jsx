@@ -1,13 +1,11 @@
-import Header from "./components/Header";
-import InputArea from "./components/InputArea";
+import Home from "./components/Pages/Home"
 
 function App() {
 
 
   return (
    <>
-   <Header/>
-   <InputArea/>
+   <Home/>
    </>
   )
 }

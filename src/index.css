@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 *, ::before, ::after {
-  border-width: 0;
-  border-style: none; /* override */
+/* override */
 }
 
 :root {
