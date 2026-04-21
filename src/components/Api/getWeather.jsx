@@ -1,9 +1,7 @@
-
-export const GetLatLon = async (body)=>{
 const API_Url = import.meta.env.VITE_BACKEND_URL;
-
+export const locationWeather = async (body)=>{
 try{
-    fetch(API_Url,{
+    const response = await fetch(API_Url+"curweather",{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -11,17 +9,34 @@ try{
         body: JSON.stringify({
             location:body,
         })
-    })
-    const response = JSON.stringify(geocode.data);
-    console.log(response);
-    const result = (geocode.data);
-    console.log(result);
-    console.log(result[0].name);
-     const latitude = result[0].lat;
-     const longitude = result[0].lon;
-return {latitude, longitude};
+    });
+    const data = await response.json();
+return data;
 }catch(error){
-    throw new Error("Failed to make connection:", error.message);
+    return (error.message);
 }
 
+}
+
+export const coordWeather = async ({body})=>{
+    try{
+        const response = await fetch(API_Url+"corweather",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+                latitude:body.lat,
+                longitude:body.lng,
+            })
+
+        });
+        const data = await response.json();
+        return data;
+
+    }
+    catch(error){
+        throw new Error ("Failed to make connection:", error.message);
+
+    }
 }

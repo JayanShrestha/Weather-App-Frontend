@@ -3,11 +3,10 @@ import useLocation from './Hooks/getLocation';
 const GoogleMap = ()=>{
     const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
     const {latlng} = useLocation();
-    const fallbackCenter = { lat: -33.860664, lng: 151.208138 };
     const isLoading = !latlng;
     return (
 <>
-  <p>Current Location</p>
+  <p className='mt-2'>Current Location</p>
   {isLoading && (
         <div className="relative inset-0 flex items-center justify-center z-20 bg-transparent">
           <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-400 border-t-transparent"></div>
@@ -17,7 +16,7 @@ const GoogleMap = ()=>{
   
    <Map
       defaultZoom={16}
-      center={ latlng || fallbackCenter}
+      center={ latlng}
       className='w-full h-64 p-5 mx-auto border-none rounded-2xl z-0'
       onCameraChanged={ (ev) =>
         console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)

@@ -11,9 +11,11 @@ function Home() {
    <>
    <Header/>
    <InputArea/>
-   <Card className="lg:w-[50%]">
-    <GoogleMap />
+   <Card className = "w-[50%]">
+  <GoogleMap />
    </Card>
+    
+   
     
    </>
   )

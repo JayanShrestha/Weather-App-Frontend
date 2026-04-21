@@ -3,7 +3,7 @@ import Section from "./UI/Section";
 const Header = ()=>{
     return(
     <Section>
- <div className="border flex flex-col">
+ <div className="border flex flex-col border-none">
            <span className="flex justify-center items-center"> 
             <span className="px-2">
                  <Cloud size={64}/>
