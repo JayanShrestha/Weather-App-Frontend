@@ -13,12 +13,13 @@ try{
     const data = await response.json();
 return data;
 }catch(error){
-    return (error.message);
+    throw new Error(`Failed to make Connection: ${error.message}`);
 }
 
 }
 
-export const coordWeather = async ({body})=>{
+export const coordWeather = async (body)=>{
+    console.log(body);
     try{
         const response = await fetch(API_Url+"corweather",{
             method:"POST",
@@ -36,7 +37,7 @@ export const coordWeather = async ({body})=>{
 
     }
     catch(error){
-        throw new Error ("Failed to make connection:", error.message);
+        throw new Error(`Failed to make Connection: ${error.message}`);
 
     }
 }

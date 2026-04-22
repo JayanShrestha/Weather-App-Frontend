@@ -1,11 +1,13 @@
 import {APIProvider, Map, Marker} from '@vis.gl/react-google-maps';
 import useLocation from './Hooks/getLocation';
+import Card from './UI/Card';
 const GoogleMap = ()=>{
     const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
     const {latlng} = useLocation();
     const isLoading = !latlng;
     return (
 <>
+<Card className = "w-[50%]">
   <p className='mt-2'>Current Location</p>
   {isLoading && (
         <div className="relative inset-0 flex items-center justify-center z-20 bg-transparent">
@@ -26,6 +28,7 @@ const GoogleMap = ()=>{
         />
    </Map>
  </APIProvider>
+ </Card>
  </>
             
     )

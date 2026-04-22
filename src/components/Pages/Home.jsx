@@ -1,8 +1,6 @@
 import Header from "../Header";
-import InputArea from "../InputArea";
 import GoogleMap from "../GoogleMap";
-import Card from "../UI/Card";
-import { Car } from "lucide-react";
+import Weather from "../Weather";
 
 function Home() {
 
@@ -10,12 +8,8 @@ function Home() {
   return (
    <>
    <Header/>
-   <InputArea/>
-   <Card className = "w-[50%]">
-  <GoogleMap />
-   </Card>
-    
-   
+   <Weather/>
+  <GoogleMap />   
     
    </>
   )
