@@ -8,8 +8,7 @@ function Home() {
   return (
    <>
    <Header/>
-   <Weather/>
-  <GoogleMap />   
+   <Weather/> 
     
    </>
   )
