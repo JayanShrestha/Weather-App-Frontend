@@ -1,20 +1,17 @@
 import Section from "./UI/Section";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import InputArea from "./InputArea";
 import WeatherDisplay from "./WeatherDisplay";
+import GoogleMap from "./GoogleMap";
 const Weather = ()=>{
     const [weatherData, setWeatherData] = useState({});
-    
-    // Test: Log whenever weatherData is updated
-    useEffect(() => {
-        console.log("✓ weatherData updated:", weatherData);
-    }, [weatherData]);
-    
+    const [latlng, setlatlng] = useState(null);
     return (
         <>
        
-            <InputArea setWeatherData={setWeatherData}/>
+            <InputArea setWeatherData={setWeatherData} setlatlng={setlatlng}/>
             <WeatherDisplay weatherData={weatherData}/>
+            <GoogleMap latlng={latlng}/>
            
             </>
 

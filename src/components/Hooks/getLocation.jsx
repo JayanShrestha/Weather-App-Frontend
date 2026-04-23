@@ -22,12 +22,11 @@ const useLocation = ()=>{
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         const latlng = {lat, lng};
-        console.log(`Current latitude is ${lat} and longitude is ${lng}`);
+        console.log(`Current latitude and longitude is ${latlng.lat} ${latlng.lng}`);
         setlatlng(latlng);
     }
      useEffect(()=>{
         getCoord();
-        console.log(latlng);
     },[]);
     return {latlng, setlatlng};
 }

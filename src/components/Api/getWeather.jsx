@@ -41,3 +41,24 @@ export const coordWeather = async (body)=>{
 
     }
 }
+
+export const getLatLon = async(body)=>{
+    try{
+        const response = await fetch(API_Url +"getlatlng",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+                location:body,
+            })
+        });
+        const data = await response.json();
+        console.log(data.data[0].lat, data.data[0].lon);
+        return data;
+        
+    }
+    catch(error){
+        throw new Error (`Failed to make connection; ${error.message}`);
+    }
+}
