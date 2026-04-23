@@ -44,7 +44,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         // 2. Get weather
         const response = await locationWeather(input);
         setWeatherData(response.data);
-        setLocation({location:""})
+    
     }
     function handleChange(e){
        const{name, value} = e.target;
