@@ -15,6 +15,8 @@ const InputArea = ({setWeatherData, setlatlng})=>{
     const [currentLocation, setCurrentLocation] = useState(false);
     const message = `Enter the city name correctly, city or suburb name followed by comma, and country initial such as ", AU"`;
     const showToast = true;
+    const [errorToast, setErrorToast] = useState(false);
+    const [errorMessage, setErrorMessage] =useState(" "); 
     const {latlng} = useLocation();
     setlatlng(latlng);
 
@@ -27,26 +29,39 @@ const InputArea = ({setWeatherData, setlatlng})=>{
 }, []);
     async function handleClick(e){
         e.preventDefault();
+        try{
         const response = await coordWeather(latlng);
         console.log(response.data);
         setWeatherData(response.data);
-    
+        }
+        
+        catch(error){
+        setErrorToast(true);
+        setErrorMessage(`Error from server, Please try again later. `);
+        console.log(error.message);
+     
     }
+}
     async function handleSubmit(e){
         e.preventDefault();
 
         const input = e.target.location.value;
-
-        // 1. Get coordinates
-        const coord = await getLatLon(input);
+        try{
+             const coord = await getLatLon(input);
         const lat = coord.data[0].lat;
         const lng = coord.data[0].lon;
         setlatlng({ lat, lng });
 
-        // 2. Get weather
         const response = await locationWeather(input);
         setWeatherData(response.data);
        setLocation({location:""});
+        }
+        catch(error){
+            setErrorToast(true);
+            setErrorMessage(`Error from server, Please try again later. `);
+            console.log(error.message);
+        }
+        
     
     }
     function handleChange(e){
@@ -57,15 +72,20 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         [name]:value,}
        });
     }
+    function handleClose(){
+        setErrorToast(false);
+        setErrorMessage(" ");
+    }
     return(
         <>
          {showToast && <Toast message={message} />}
+         {errorToast && <Toast message={errorMessage} error={errorToast} OnClick={handleClose}/>}
         <Section id="input">
             <form className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-4 px-10 -z-10" onSubmit={handleSubmit}>
                
             <Input type="text" className="min-w px-10 text-slate-900 dark:text-slate-200" placeholder="Search the city...." name="location" value={location.location} id="location"
             onChange={handleChange} required/>
-                <div className="flex gap-2 text-xs md:text-sm">
+                <div className="flex gap-2 text-xs md:text-sm justify-center items-center">
                     <Button type="submit" className={`flex gap-2`}><Search className="md:hidden" size={16}/><Search className="hidden md:block"/> Search</Button>
                     <Button className={`button flex gap-2 ${!currentLocation?"translate-x-96 opacity-0 hidden":"translate-x-0 opacity-1"}`} type="button" onClick={handleClick}> <MapPin className="md:hidden" size={16}/><MapPin className="hidden md:block"/>Use My Location</Button>
                 </div>
@@ -76,4 +96,5 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         </>
     )
 }
+
 export default InputArea;

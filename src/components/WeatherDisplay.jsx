@@ -9,6 +9,9 @@ const WeatherDisplay = ({weatherData})=>{
         return iconCode;
 
     }
+    if(weatherData ===undefined){
+        return;
+    }
     return (Object.keys(weatherData).length>0)?( 
             <Section>
                 <div className="grid md:grid-cols-2 gap-4">
