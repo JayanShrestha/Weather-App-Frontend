@@ -66,10 +66,6 @@ body {
 .measure{
   @apply text-slate-900 text-xs md:text-base font-semibold
 }
-.weather-icon {
-  filter: brightness(0) invert(1);
-}
-
 #root {
   max-width: 100%;
   margin: 0 auto;

@@ -2,9 +2,10 @@ import { Cloud } from "lucide-react";
 import Section from "./UI/Section";
 import Card from "./UI/Card";
 const Header = ()=>{
+    
     return(
     <Section>
- <div className="border flex flex-col border-none justify-center items-center">
+ <div className={`border flex flex-col border-none justify-center items-center`}>
            <span className="flex justify-center items-center"> 
             <span className="px-2">
                  <Cloud size={64}/>

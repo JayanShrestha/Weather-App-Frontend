@@ -1,21 +1,32 @@
 import { Droplet, Droplets, Eye, Wind } from "lucide-react";
 import Card from "./UI/Card";
 import Section from "./UI/Section";
+import { WeatherIcon } from "./Weather-icons";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
-    console.log(current);
+    if(!current) return null;
     return(
-        <Section id="currentweather">
-       <Card className="text-slate-900 font-semibold">
+        <AnimatePresence mode="wait">
+            <motion.div
+            key={city}
+            initial={{opacity: 0, y: 20, scale: 0.98}}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+        >
+            <Section id="currentweather">
+       <Card className="font-semibold">
         <div className="py-4">
-        <div className="flex items-center justify-between p-6">
-            <span>{city}, {country}</span>
-            <img className="drop-shadow-lg animate-bounce weather-icon" src={getWeatherIcon(current)} alt={current.weather[0].description}/>
+        <div className="flex items-center justify-between px-6 ">
+            <span className="text-slate-900 ">{city}, {country}</span>
+            <WeatherIcon code={getWeatherIcon(current)} className="w-32 h-32"/>
 
         </div>
         <div className="grid items-center justify-center py-4">
              <span><h1 className="text-slate-900">{Math.round(current.main.temp)} {metric}</h1></span>
-             <span className="text-xl -mt-2">{current.weather[0].description.split(" ").map((word)=>word.charAt(0).toUpperCase()+word.slice(1)).join(" ")} </span>
+             <span className="text-xl -mt-2 text-slate-900 ">{current.weather[0].description.split(" ").map((word)=>word.charAt(0).toUpperCase()+word.slice(1)).join(" ")} </span>
              <span className="text"> Feels like {Math.round(current.main.feels_like)} {metric}</span>
         </div>
         <div className="grid grid-flow-col grid-cols-2 gap-3 px-6">
@@ -32,7 +43,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
                 </span>
             </Card>
              <Card>
-                <span className="grid grid-flow-col md:grid-cols-2 py-4 border-none rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/10 backdrop-blur-sm">
+                <span className="grid grid-flow-col lg:grid-cols-2 py-4 border-none rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
                         <Wind className="text-green-500"/>
                         <span className="flex flex-col items-start pl-2">
@@ -40,7 +51,6 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
                         <p className="measure">{current.wind.speed} m/s</p>
                     </span>
                     </div>
-                    <span>{""}</span>
                 </span>
             </Card>
             
@@ -75,6 +85,9 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
         </div>
         </Card>
         </Section>
+        </motion.div>
+        </AnimatePresence>
+        
 
     )
 }
