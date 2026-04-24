@@ -1,36 +1,46 @@
 import Card from "./UI/Card"
 import Section from "./UI/Section";
 import ForcastCard from "./ForcastCard";
+import { WeatherIcon } from "./Weather-icons";
+import { AnimatePresence} from "framer-motion";
+import { motion } from "framer-motion";
 
-const ForecastWeather = ({forecast, getWeatherIcon, metric})=>{
-    console.log(forecast);
+const ForecastWeather = ({forecast, city, getWeatherIcon, metric})=>{
     const getDay=(item)=>{
         const date = new Date(item);
         return date.toLocaleDateString("en-US", {weekday:"short"});
     }
+     if(!forecast) return null;
     return(
-        <>
-        <Section>
+        <AnimatePresence mode="wait">
+            <motion.div
+            key={city}
+            initial={{opacity: 0, y: 20, scale: 0.98}}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+        >
+            <Section>
             <Card className="font-semibold">
                 <div className="flex flex-col gap-4 items-start justify-start p-3">
                 <span className="measure">5-Day Forecast</span>
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-5 gap-2 w-full">
                     {forecast.map((item)=>{
                         return(
-                        <ForcastCard key={item.dt_txt}>
-                        <div className="flex flex-col">
+                        <ForcastCard key={item.dt_txt} className="py-8">
+                        <div className="flex flex-col items-center">
                             <span className="measure">
                                 {getDay(item.dt_txt)}
                             </span>
                             <span>
-                            <img className="drop-shadow-lg weather-icon" src={getWeatherIcon(item)} alt={item.weather[0].description}/>
+                             <WeatherIcon code={getWeatherIcon(item).replace("n", "d")} className="h-8 w-8 md:h-12 md:w-12" />
                             </span>
                             <p className="measure">
                                 {Math.round(item.main.temp)} {metric}
                             </p>
                 
                             <p className="text-slate-900 text-xs">
-                                {item.weather[0].description}
+                                {item.weather[0].description.split(" ").map((word)=>word.charAt(0).toUpperCase()+word.slice(1)).join(" ")}
                             </p>
                         </div>
                     </ForcastCard>
@@ -46,7 +56,10 @@ const ForecastWeather = ({forecast, getWeatherIcon, metric})=>{
             </Card>
             
             </Section>
-            </>
+        </motion.div>
+        </AnimatePresence>
+        
+            
     )
 }
 export default ForecastWeather;
