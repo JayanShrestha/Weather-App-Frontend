@@ -64,7 +64,7 @@ body {
   @apply text-slate-500 text-xs md:text-base font-semibold
 }
 .measure{
-  @apply text-slate-900 text-xs md:text-base font-semibold
+  @apply text-slate-900 text-xs md:text-base font-bold
 }
 #root {
   max-width: 100%;

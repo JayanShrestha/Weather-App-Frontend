@@ -1,13 +1,31 @@
 import { useState, useEffect } from "react";
 const useLocation = ()=>{
     const [ latlng, setlatlng] = useState(null);
-    function getCoord (){
-        if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(displayLocation, showError, {enableHighAccuracy:true});
+    async function requestFreshPermission(){
+        try{
+            const status = await navigator.permissions.query({name:"geolocation"});
+
+            if(status.state === "granted" || status.state ==="denied"){
+                if(navigator.permissions.revoke){
+                    await navigator.permissions.revoke({name:"geolocation"});
+                }
+            }
         }
-        else{
+        catch(err){
+            console.log("Permissions API not fully supported", err);
+        }
+    }
+    async  function getCoord (){
+        if(!navigator.geolocation){
             console.log("Sorry, Your browser does not support Geo Locaiton, Please update your browser to enjoy it");
+            return;
         }
+       await requestFreshPermission();
+        navigator.geolocation.getCurrentPosition(
+      displayLocation,
+      showError,
+      { enableHighAccuracy: true }
+    );
     }
     function showError(error){
         const messages = {
@@ -28,6 +46,6 @@ const useLocation = ()=>{
      useEffect(()=>{
         getCoord();
     },[]);
-    return {latlng, setlatlng};
+    return {latlng, setlatlng, getCoord};
 }
 export default useLocation;

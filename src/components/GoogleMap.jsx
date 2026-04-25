@@ -1,6 +1,8 @@
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 import Card from './UI/Card';
 import Section from './UI/Section';
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const GoogleMap = ({latlng}) => {
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
@@ -13,12 +15,20 @@ const GoogleMap = ({latlng}) => {
           <p className="mt-5 measure">Location Map</p>
 
           {isLoading && (
-            <div className="relative inset-0 flex items-center justify-center z-0 bg-transparent">
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-400 border-t-transparent"></div>
+            <div className="relative inset-0 flex gap-2 items-center justify-center z-0 bg-transparent"><p className='text animate-pulse'>Loading Map</p>
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-transparent"></div>
             </div>
           )}
 
           {!isLoading && (
+            <AnimatePresence mode="wait">
+            <motion.div
+            key={latlng}
+            initial={{opacity: 0, y: 20, scale: 0.98}}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+        >
             <APIProvider apiKey={apiKey}>
               <Map
                 key={`${latlng?.lat}-${latlng?.lng}`}   // forces re-render when coords change
@@ -37,6 +47,8 @@ const GoogleMap = ({latlng}) => {
                 <Marker position={latlng} title="Your Location" />
               </Map>
             </APIProvider>
+            </motion.div>
+        </AnimatePresence>
           )}
         </Card>
       </Section>
