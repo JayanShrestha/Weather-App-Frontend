@@ -39,7 +39,7 @@ const ForecastWeather = ({forecast, city, getWeatherIcon, metric})=>{
                                 {Math.round(item.main.temp)} {metric}
                             </p>
                 
-                            <p className="text-slate-900 text-xs">
+                            <p className="text-slate-900 text-[10px] md:text-sm">
                                 {item.weather[0].description.split(" ").map((word)=>word.charAt(0).toUpperCase()+word.slice(1)).join(" ")}
                             </p>
                         </div>

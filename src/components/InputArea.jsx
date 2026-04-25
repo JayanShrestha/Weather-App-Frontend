@@ -17,8 +17,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
     const showToast = true;
     const [errorToast, setErrorToast] = useState(false);
     const [errorMessage, setErrorMessage] =useState(" "); 
-    const {latlng} = useLocation();
-    setlatlng(latlng);
+    const {latlng, getCoord} = useLocation();
 
     useEffect(() => {
   const timer = setTimeout(() => {
@@ -29,8 +28,10 @@ const InputArea = ({setWeatherData, setlatlng})=>{
 }, []);
     async function handleClick(e){
         e.preventDefault();
+        getCoord();
         try{
         const response = await coordWeather(latlng);
+        setlatlng(latlng);
         console.log(response.data);
         setWeatherData(response.data);
         }
@@ -51,10 +52,10 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         const lat = coord.data[0].lat;
         const lng = coord.data[0].lon;
         setlatlng({ lat, lng });
-
+        setLocation({location:" "});
         const response = await locationWeather(input);
         setWeatherData(response.data);
-       setLocation({location:""});
+      
         }
         catch(error){
             setErrorToast(true);
