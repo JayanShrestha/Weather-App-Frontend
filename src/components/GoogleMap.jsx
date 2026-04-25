@@ -15,7 +15,7 @@ const GoogleMap = ({latlng}) => {
           <p className="mt-5 measure">Location Map</p>
 
           {isLoading && (
-            <div className="relative inset-0 flex gap-2 items-center justify-center z-0 bg-transparent"><p className='text animate-pulse'>Loading Map</p>
+            <div className="relative py-2 inset-0 flex gap-2 items-center justify-center z-0 bg-transparent"><p className='text animate-pulse'>Loading Map</p><p className='text animate-pulse'>Enable location please!</p>
               <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-transparent"></div>
             </div>
           )}
@@ -27,7 +27,7 @@ const GoogleMap = ({latlng}) => {
             initial={{opacity: 0, y: 20, scale: 0.98}}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 1, ease: "easeOut" }}
         >
             <APIProvider apiKey={apiKey}>
               <Map

@@ -4,9 +4,12 @@ import Section from "./UI/Section";
 import { WeatherIcon } from "./Weather-icons";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
+import toFahrenheit from "./Hooks/getFahrenheit";
 
-const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
-    if(!current) return null;
+const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle })=>{
+    const temp = current?Math.round(current.main.temp):0;
+    const fahrenheit =Math.round(toFahrenheit(temp));
+     if(!current) return null;
     return(
         <AnimatePresence mode="wait">
             <motion.div
@@ -14,7 +17,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
             initial={{opacity: 0, y: 20, scale: 0.98}}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 1, ease: "easeOut" }}
         >
             <Section id="currentweather">
        <Card className="font-semibold">
@@ -25,7 +28,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon })=>{
 
         </div>
         <div className="grid items-center justify-center py-4">
-             <span><h1 className="text-slate-900">{Math.round(current.main.temp)} {metric}</h1></span>
+             <span><h1 className="text-slate-900">{!toggle?Math.round(current.main.temp):fahrenheit} {!toggle?metric:"°F"}</h1></span>
              <span className="text-xl -mt-2 text-slate-900 ">{current.weather[0].description.split(" ").map((word)=>word.charAt(0).toUpperCase()+word.slice(1)).join(" ")} </span>
              <span className="text"> Feels like {Math.round(current.main.feels_like)} {metric}</span>
         </div>
