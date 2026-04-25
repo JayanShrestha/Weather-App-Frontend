@@ -38,7 +38,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         
         catch(error){
         setErrorToast(true);
-        setErrorMessage(`Error from server, Please try again later. `);
+        setErrorMessage(`Enable location on your device, and please try again.`);
         console.log(error.message);
      
     }
@@ -59,7 +59,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         }
         catch(error){
             setErrorToast(true);
-            setErrorMessage(`Error from server, Please try again later. `);
+            setErrorMessage(`Error from server, please try again later. `);
             console.log(error.message);
         }
         
