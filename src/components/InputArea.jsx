@@ -8,6 +8,7 @@ import { coordWeather } from "./Api/getWeather";
 import { getLatLon } from "./Api/getWeather";
 import Toast from "./Toast";
 import useLocation from "./Hooks/getLocation";
+import useCitySearch from "./Hooks/useCitySearch";
 
 
 const InputArea = ({setWeatherData, setlatlng})=>{
@@ -18,6 +19,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
     const [errorToast, setErrorToast] = useState(false);
     const [errorMessage, setErrorMessage] =useState(" "); 
     const {latlng, getCoord} = useLocation();
+    const {results, loading} = useCitySearch(location.location);
 
     useEffect(() => {
   const timer = setTimeout(() => {
@@ -82,10 +84,26 @@ const InputArea = ({setWeatherData, setlatlng})=>{
          {showToast && <Toast message={message} />}
          {errorToast && <Toast message={errorMessage} error={errorToast} OnClick={handleClose}/>}
         <Section id="input">
-            <form className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-4 px-10 -z-10" onSubmit={handleSubmit}>
+            <form className="grid grid-cols-1 md:flex md:justify-center gap-4 px-10 -z-10" onSubmit={handleSubmit}>
                
-            <Input type="text" className="min-w px-10 text-slate-900 dark:text-slate-200" placeholder="Search the city...." name="location" value={location.location} id="location"
+            <Input type="text" className="md:w-[30%] px-10 text-slate-900 dark:text-slate-200" placeholder="Search the city...." name="location" value={location.location} id="location"
             onChange={handleChange} required/>
+
+      {results.length > 0 && (
+        <ul className="absolute md:w-[20%]  bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 drop-shadow-lg rounded-lg mt-10 h-fit overflow-y-auto z-50">
+          {results.map((city, index) => (
+            <li
+              key={index}
+              onClick={() => {
+                setLocation({location:city.city ||city.name});
+              }}
+              className="text-xs md:text-base hover:bg-gray-100 hover:text-slate-700 dark:hover:bg-gray-800 cursor-pointer"
+            >
+              {city.city || city.name}, {city.country}
+            </li>
+          ))}
+        </ul>
+      )}
                 <div className="flex gap-2 text-xs md:text-sm justify-center items-center">
                     <Button type="submit" className={`flex gap-2`}><Search className="md:hidden" size={16}/><Search className="hidden md:block"/> Search</Button>
                     <Button className={`button flex gap-2 ${!currentLocation?"translate-x-96 opacity-0 hidden":"translate-x-0 opacity-1"}`} type="button" onClick={handleClick}> <MapPin className="md:hidden" size={16}/><MapPin className="hidden md:block"/>Use My Location</Button>
