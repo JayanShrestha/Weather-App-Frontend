@@ -34,7 +34,7 @@ const ForecastWeather = ({forecast, city, getWeatherIcon, metric, toggle})=>{
                                 {getDay(item.dt_txt)}
                             </span>
                             <span>
-                             <WeatherIcon code={getWeatherIcon(item).replace("n", "d")} className="h-8 w-8 md:h-12 md:w-12" />
+                             <WeatherIcon code={getWeatherIcon(item).replace("n", "d")} className="h-8 w-8 md:h-12 md:w-12 drop-shadow-lg" />
                             </span>
                             <p className="measure">
                                 {!toggle?Math.round(item.main.temp):fahrenheit} {!toggle?metric:"°F"}

@@ -24,7 +24,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle 
         <div className="py-4">
         <div className="flex items-center justify-between px-6 ">
             <span className="text-slate-900 ">{city}, {country}</span>
-            <WeatherIcon code={getWeatherIcon(current)} className="w-32 h-32"/>
+            <WeatherIcon code={getWeatherIcon(current)} className="w-32 h-32 drop-shadow-xl"/>
 
         </div>
         <div className="grid items-center justify-center py-4">
@@ -65,7 +65,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle 
                          <Eye className="text-purple-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Visibility</p>
-                        <p className="measure">{(current.visibility)/1000} Km</p>
+                        <p className="measure">{(current.visibility)} M</p>
                     </span>
                     </div>
                    
