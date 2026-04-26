@@ -90,7 +90,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
             onChange={handleChange} required/>
 
       {results.length > 0 && (
-        <ul className="absolute md:w-[20%]  bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 drop-shadow-lg rounded-lg mt-10 h-fit overflow-y-auto z-50">
+        <ul className="absolute md:w-[20%] ml-24 bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 drop-shadow-lg rounded-lg mt-10 h-fit overflow-y-auto z-50">
           {results.map((city, index) => (
             <li
               key={index}

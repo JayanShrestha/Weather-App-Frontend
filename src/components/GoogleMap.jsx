@@ -11,7 +11,7 @@ const GoogleMap = ({latlng}) => {
   return (
     <>
       <Section>
-        <Card className="w-full md:w-[50%]">
+        <Card className="w-full md:w-[60%] mx-auto">
           <p className="mt-5 measure">Location Map</p>
 
           {isLoading && (
