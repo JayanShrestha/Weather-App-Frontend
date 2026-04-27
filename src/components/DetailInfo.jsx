@@ -1,6 +1,6 @@
 import Section from "./UI/Section"
 import Card from "./UI/Card";
-import { Gauge, Sunrise, Sunset } from "lucide-react";
+import { Cloud, CloudRain, Compass, Gauge, PersonStanding, Sunrise, Sunset } from "lucide-react";
 import toFahrenheit from "./Hooks/getFahrenheit";
 import {motion, AnimatePresence} from "framer-motion";
 
@@ -82,7 +82,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
              <Card>
                 <span className="grid grid-flow-col  py-4 border-none rounded-2xl bg-gradient-to-br from-red-500/20 to-rose-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
-                        <Sunset className="text-rose-500"/>
+                        <Gauge className="text-rose-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Max Temp</p>
                         <p className="measure">{!toggle?Math.round(current.main.temp_max):fahrenheit} {!toggle?metric:"°F"}</p>
@@ -98,7 +98,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
             <Card>
                 <span className="grid grid-flow-col py-4 border-none rounded-2xl bg-gradient-to-br from-purple-500/20 to-indigo-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
-                         <Sunrise className="text-purple-500"/>
+                         <Cloud className="text-purple-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Clouds</p>
                         <p className="measure">{(current.clouds.all)} %</p>
@@ -110,7 +110,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
              <Card>
                 <span className="grid grid-flow-col  py-4 border-none rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
-                        <Sunset className="text-orange-500"/>
+                        <CloudRain className="text-orange-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Precipitation</p>
                         <p className="measure">{(current.pop)*100} %</p>
@@ -127,7 +127,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
             <Card>
                 <span className="grid grid-flow-col py-4 border-none rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
-                         <Sunrise className="text-cyan-500"/>
+                         <PersonStanding className="text-cyan-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Population</p>
                         <p className="measure">{setPopulation(population)} </p>
@@ -139,7 +139,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
              <Card>
                 <span className="grid grid-flow-col  py-4 border-none rounded-2xl bg-gradient-to-br from-red-500/20 to-rose-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
-                        <Sunset className="text-rose-500"/>
+                        <Compass className="text-rose-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">direction</p>
                         <p className="measure">{current.wind.deg} °</p>
