@@ -2,8 +2,9 @@ import Section from "./UI/Section"
 import Card from "./UI/Card";
 import { Gauge, Sunrise, Sunset } from "lucide-react";
 import toFahrenheit from "./Hooks/getFahrenheit";
+import {motion, AnimatePresence} from "framer-motion";
 
-const DetailInfo = ({current, detail, toggle, metric})=>{
+const DetailInfo = ({current, detail, toggle, metric, city})=>{
      const temp = current?Math.round(current.main.temp):0;
         const fahrenheit =Math.round(toFahrenheit(temp));
          if(!current) return null;
@@ -23,6 +24,14 @@ const DetailInfo = ({current, detail, toggle, metric})=>{
     }
     return(
 <Section id="detailinfo">
+    <AnimatePresence mode="wait">
+            <motion.div
+            key={city}
+            initial={{opacity: 0, y: 20, scale: 0.98}}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+        >
 <Card className="font-semibold">
     <div className="grid py-4">
         <p className="measure  px-6 flex justify-start">
@@ -147,6 +156,8 @@ const DetailInfo = ({current, detail, toggle, metric})=>{
     </div>
 
 </Card>
+</motion.div>
+</AnimatePresence>
 </Section>
     )
 }

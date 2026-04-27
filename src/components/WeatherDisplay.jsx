@@ -24,7 +24,7 @@ const WeatherDisplay = ({weatherData, toggle, latlng})=>{
             </div>
            
             <div className="grid">
-                 <DetailInfo current={weatherData.list[0]} detail={weatherData} toggle={toggle} metric={"°C"}/>
+                 <DetailInfo current={weatherData.list[0]} detail={weatherData} city={weatherData.city.name} toggle={toggle} metric={"°C"}/>
             <ForecastWeather toggle={toggle} forecast={weatherData.list.filter((item)=>item.dt_txt.includes("12:00:00"))} city={weatherData.city.name} metric={"°C"} getWeatherIcon={getWeatherIcon} />
             </div>
             </div>
