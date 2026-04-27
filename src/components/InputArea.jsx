@@ -11,7 +11,7 @@ import useLocation from "./Hooks/getLocation";
 import useCitySearch from "./Hooks/useCitySearch";
 
 
-const InputArea = ({setWeatherData, setlatlng})=>{
+const InputArea = ({setWeatherData, setlatlng, setlatlngUpdate})=>{
     const [location, setLocation] = useState({location:""});
     const [currentLocation, setCurrentLocation] = useState(false);
     const message = `Enter the city name correctly, city or suburb name followed by comma, and country initial such as ", AU"`;
@@ -19,7 +19,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
     const [errorToast, setErrorToast] = useState(false);
     const [errorMessage, setErrorMessage] =useState(" "); 
     const {latlng, getCoord} = useLocation();
-    const {results, loading} = useCitySearch(location.location);
+    const {results} = useCitySearch(location.location);
 
     useEffect(() => {
   const timer = setTimeout(() => {
@@ -36,6 +36,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         setlatlng(latlng);
         console.log(response.data);
         setWeatherData(response.data);
+        setlatlngUpdate(true);
         }
         
         catch(error){
@@ -57,6 +58,7 @@ const InputArea = ({setWeatherData, setlatlng})=>{
         setLocation({location:" "});
         const response = await locationWeather(input);
         setWeatherData(response.data);
+        setlatlngUpdate(true);
       
         }
         catch(error){

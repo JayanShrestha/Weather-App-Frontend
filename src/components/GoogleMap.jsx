@@ -11,7 +11,15 @@ const GoogleMap = ({latlng}) => {
   return (
     <>
       <Section>
-        <Card className="w-full md:w-[60%] mx-auto">
+         <AnimatePresence mode="wait">
+            <motion.div
+            key={latlng}
+            initial={{opacity: 0, y: 20, scale: 0.98}}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+        >
+        <Card className={`w-full mx-auto`}>
           <p className="mt-5 measure">Location Map</p>
 
           {isLoading && (
@@ -21,14 +29,7 @@ const GoogleMap = ({latlng}) => {
           )}
 
           {!isLoading && (
-            <AnimatePresence mode="wait">
-            <motion.div
-            key={latlng}
-            initial={{opacity: 0, y: 20, scale: 0.98}}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.98 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-        >
+           
             <APIProvider apiKey={apiKey}>
               <Map
                 key={`${latlng?.lat}-${latlng?.lng}`}   // forces re-render when coords change
@@ -47,10 +48,13 @@ const GoogleMap = ({latlng}) => {
                 <Marker position={latlng} title="Your Location" />
               </Map>
             </APIProvider>
-            </motion.div>
-        </AnimatePresence>
+           
+     
           )}
         </Card>
+          </motion.div>
+          </AnimatePresence>
+
       </Section>
     </>
   );

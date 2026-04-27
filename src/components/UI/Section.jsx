@@ -4,7 +4,7 @@ const Section = ({
   children,
 })=>{
     return(
-        <div id={id} className={`my-5 max-w-full md:px-5 ${className}`}>
+        <div id={id} className={`my-5 max-w-full md:px-2 ${className}`}>
             {children}
             </div>
 

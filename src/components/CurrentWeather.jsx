@@ -46,7 +46,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle 
                 </span>
             </Card>
              <Card>
-                <span className="grid grid-flow-col lg:grid-cols-2 py-4 border-none rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/10 backdrop-blur-sm">
+                <span className="grid grid-flow-col py-4 border-none rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/10 backdrop-blur-sm">
                     <div className="flex items-center justify-start pl-2">
                         <Wind className="text-green-500"/>
                         <span className="flex flex-col items-start pl-2">

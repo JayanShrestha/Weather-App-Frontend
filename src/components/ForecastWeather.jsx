@@ -22,7 +22,7 @@ const ForecastWeather = ({forecast, city, getWeatherIcon, metric, toggle})=>{
         >
             <Section>
             <Card className="font-semibold">
-                <div className="flex flex-col gap-4 items-start justify-start p-3">
+                <div className="flex flex-col gap-4 py-8 items-start justify-start p-3">
                 <span className="measure">5-Day Forecast</span>
                 <div className="grid grid-cols-5 gap-2 w-full">
                     {forecast.map((item)=>{
