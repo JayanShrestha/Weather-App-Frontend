@@ -97,9 +97,9 @@ const InputArea = ({setWeatherData, setlatlng, setlatlngUpdate})=>{
             <li
               key={index}
               onClick={() => {
-                setLocation({location:city.city ||city.name});
+                setLocation({location:city.city ||city.name + `,${city.country}`});
               }}
-              className="text-xs md:text-base hover:bg-gray-100 hover:text-slate-700 dark:hover:bg-gray-800 cursor-pointer"
+              className="text-xs md:text-base hover:bg-gray-100 hover:text-slate-700 cursor-pointer"
             >
               {city.city || city.name}, {city.country}
             </li>
