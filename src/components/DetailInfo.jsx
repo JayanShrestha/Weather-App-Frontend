@@ -19,8 +19,13 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
 }
     const population= detail.city.population.toLocaleString('en-US');
     function setPopulation(item){
-        if (item>0) return item;
-        return ("N/A");
+        if (item===0) {
+            return ("N/A");
+            }
+        else{
+        return item
+        }
+       
     }
     return(
 <Section id="detailinfo">
@@ -141,7 +146,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
                     <div className="flex items-center justify-start pl-2">
                         <Compass className="text-rose-500"/>
                         <span className="flex flex-col items-start pl-2">
-                        <p className="text">direction</p>
+                        <p className="text">Direction</p>
                         <p className="measure">{current.wind.deg} °</p>
                     </span>
                     </div>
