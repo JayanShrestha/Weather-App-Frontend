@@ -51,7 +51,7 @@ const InputArea = ({setWeatherData, setlatlng, setlatlngUpdate})=>{
 
         const input = e.target.location.value;
         try{
-             const coord = await getLatLon(input);
+             const coord = await getLatLon(input.trim());
         const lat = coord.data[0].lat;
         const lng = coord.data[0].lon;
         setlatlng({ lat, lng });
@@ -108,7 +108,7 @@ const InputArea = ({setWeatherData, setlatlng, setlatlngUpdate})=>{
       )}
                 <div className="flex gap-2 text-xs md:text-sm justify-center items-center">
                     <Button type="submit" className={`flex gap-2`}><Search className="md:hidden" size={16}/><Search className="hidden md:block"/> Search</Button>
-                    <Button className={`button flex gap-2 ${!currentLocation?"translate-x-96 opacity-0 hidden":"translate-x-0 opacity-1"}`} type="button" onClick={handleClick}> <MapPin className="md:hidden" size={16}/><MapPin className="hidden md:block"/>Use My Location</Button>
+                    <Button className={`button flex gap-2 transition-all ${!currentLocation?"translate-x-96 opacity-0 hidden":"translate-x-0 opacity-1"}`} type="button" onClick={handleClick}> <MapPin className="md:hidden" size={16}/><MapPin className="hidden md:block"/><span className="text-[9px] md:text-sm">Use My Location</span></Button>
                 </div>
               </form>
              
