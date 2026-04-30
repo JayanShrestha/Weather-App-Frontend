@@ -29,7 +29,7 @@ const ForecastWeather = ({forecast, city, getWeatherIcon, metric, toggle})=>{
                          const fahrenheit =Math.round(toFahrenheit(item.main.temp));
                         return(
                         <ForcastCard key={item.dt_txt} className="py-8">
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center justify-center">
                             <span className="measure">
                                 {getDay(item.dt_txt)}
                             </span>

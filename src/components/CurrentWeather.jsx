@@ -30,7 +30,7 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle 
         <div className="grid items-center justify-center py-4">
              <span><h1 className="text-slate-900">{!toggle?Math.round(current.main.temp):fahrenheit} {!toggle?metric:"°F"}</h1></span>
              <span className="text-xl -mt-2 text-slate-900 ">{current.weather[0].description.split(" ").map((word)=>word.charAt(0).toUpperCase()+word.slice(1)).join(" ")} </span>
-             <span className="text"> Feels like {Math.round(current.main.feels_like)} {metric}</span>
+             <span className="text"> Feels like {!toggle?Math.round(current.main.feels_like):fahrenheit} {!toggle?metric:"°F"}</span>
         </div>
         <div className="grid grid-flow-col grid-cols-2 gap-3 px-6">
             <Card>

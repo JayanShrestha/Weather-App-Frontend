@@ -8,9 +8,10 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
      const temp = current?Math.round(current.main.temp):0;
         const fahrenheit =Math.round(toFahrenheit(temp));
          if(!current) return null;
-    function getTime(item){
-    const date = new Date(item*1000);
+    function getTime(item, timezone){
+    const date = new Date((item+timezone)*1000);
     return date.toLocaleTimeString([],{
+        timeZone: 'UTC',
         hour:'2-digit',
         minute: '2-digit', 
         second: '2-digit', 
@@ -18,12 +19,12 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
     });
 }
     const population= detail.city.population.toLocaleString('en-US');
-    function setPopulation(item){
-        if (item===0) {
+    function setPopulation(population){
+        if (Number(population)===0) {
             return ("N/A");
             }
         else{
-        return item
+        return population;
         }
        
     }
@@ -50,7 +51,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
                          <Sunrise className="text-amber-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Sunrise</p>
-                        <p className="measure">{getTime(detail.city.sunrise)} </p>
+                        <p className="measure">{getTime(detail.city.sunrise, detail.city.timezone)} </p>
                     </span>
                     </div>
                    
@@ -62,7 +63,7 @@ const DetailInfo = ({current, detail, toggle, metric, city})=>{
                         <Sunset className="text-gray-500"/>
                         <span className="flex flex-col items-start pl-2">
                         <p className="text">Sunset</p>
-                        <p className="measure">{getTime(detail.city.sunset)} </p>
+                        <p className="measure">{getTime(detail.city.sunset, detail.city.timezone)} </p>
                     </span>
                     </div>
                 
