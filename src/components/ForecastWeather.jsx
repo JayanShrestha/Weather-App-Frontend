@@ -22,7 +22,7 @@ const ForecastWeather = ({forecast, city, getWeatherIcon, metric, toggle})=>{
         >
             <Section>
             <Card className="font-semibold">
-                <div className="flex flex-col gap-4 py-8 items-start justify-start p-3">
+                <div className="flex flex-col gap-4 items-start justify-start p-3">
                 <span className="measure">5-Day Forecast</span>
                 <div className="grid grid-cols-5 gap-2 w-full">
                     {forecast.map((item)=>{
@@ -34,7 +34,7 @@ const ForecastWeather = ({forecast, city, getWeatherIcon, metric, toggle})=>{
                                 {getDay(item.dt_txt)}
                             </span>
                             <span>
-                             <WeatherIcon code={getWeatherIcon(item).replace("n", "d")} className="h-8 w-8 md:h-12 md:w-12 drop-shadow-lg" />
+                             <WeatherIcon code={getWeatherIcon(item)} className="h-8 w-8 md:h-12 md:w-12 drop-shadow-lg" />
                             </span>
                             <p className="measure">
                                 {!toggle?Math.round(item.main.temp):fahrenheit} {!toggle?metric:"°F"}

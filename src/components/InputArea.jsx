@@ -34,7 +34,6 @@ const InputArea = ({setWeatherData, setlatlng, setlatlngUpdate})=>{
         try{
         const response = await coordWeather(latlng);
         setlatlng(latlng);
-        console.log(response.data);
         setWeatherData(response.data);
         setlatlngUpdate(true);
         }

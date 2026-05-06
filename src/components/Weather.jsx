@@ -5,6 +5,7 @@ import WeatherDisplay from "./WeatherDisplay";
 import GoogleMap from "./GoogleMap";
 import useLocation from "./Hooks/getLocation";
 import Toggle from "./Toggle";
+import Chart from "./Chart";
 
 const Weather = ()=>{
     const [weatherData, setWeatherData] = useState({});
