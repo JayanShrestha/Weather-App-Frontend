@@ -32,7 +32,7 @@ const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
     const Chartdata = useMemo(()=> {
         if(Object.keys(weatherData).length >0){
             const filteredData = weatherData.list.filter((item)=>item.dt_txt.includes(now));
-            const dataset = filteredData.map((item)=>Math.round(item.main.temp));
+            const dataset = filteredData.map((item)=>item.main.temp);
             const labels = filteredData.map((item)=>new Date(item.dt*1000).toLocaleTimeString([],{
             timeZone: 'UTC',
             hour:'2-digit',
@@ -47,8 +47,8 @@ const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
                 {
                   label: `Temperature (${temp})`,
                   data: fahrenheitData,
-                  backgroundColor: "#3b82f6",
-                  borderColor: '#3b82f6',
+                  backgroundColor: "#f59e0b",
+                  borderColor: '#dddd',
                   tension: 0.3,
                     pointRadius: 6,
                     pointHoverRadius: 9,
@@ -68,20 +68,40 @@ const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
     },
     scales: {
       x: {
+       
         ticks: {
+          color: "#000000",
           maxRotation: 0,
           autoSkip: true,
         },
+        title: {
+          display: true,
+          text: "Time",
+          color: "#000000",
+          font: { size: 16, weight: "bold" },
       },
+    },
       y: {
         beginAtZero: false,
         ticks: {
+            color:"#000000",
           callback: (value) => `${value}°`,
         },
+         title: {
+          display: true,
+          text: "Temperature",
+          color: "#000000",
+          font: { size: 16, weight: "bold" },
+      },
       },
     },
     plugins: {
-      legend: { display: true },
+      legend: { 
+        display: true,
+        labels:{
+            color: "#000000",
+            font:{ size: 14,},
+        } },
       tooltip: {
         callbacks: {
           label: (ctx) => `Temperature: ${ctx.raw} ${temp}`,
@@ -101,8 +121,8 @@ const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
             transition={{ duration: 1, ease: "easeOut" }}
         >
             <Section id="chart">
-        <Card className="font-semibold">
-            <div className="flex justify-center items-center w-full min-h-[300px] p-2">
+        <Card >
+            <div className="flex justify-center items-center w-full min-h-[300px] p-4 font-semibold text-slate-800">
         <Line data={Chartdata} options={chartOptions} />
             </div>
        </Card>
