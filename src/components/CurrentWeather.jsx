@@ -9,6 +9,7 @@ import toFahrenheit from "./Hooks/getFahrenheit";
 const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle })=>{
     const temp = current?Math.round(current.main.temp):0;
     const fahrenheit =Math.round(toFahrenheit(temp));
+    const date = new Date(current.dt*1000);
      if(!current) return null;
     return(
         <AnimatePresence mode="wait">
@@ -23,7 +24,10 @@ const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle 
        <Card className="font-semibold">
         <div className="py-4">
         <div className="flex items-center justify-between px-6 ">
-            <span className="text-slate-900 ">{city}, {country}</span>
+            <span className="text-slate-900 grid items-start justify-start">
+                <span>{city}, {country}</span>
+                <span>{date.toLocaleDateString("en-US",{weekday:"long"})}</span>
+            </span>
             <WeatherIcon code={getWeatherIcon(current)} className="w-32 h-32 drop-shadow-xl"/>
 
         </div>
