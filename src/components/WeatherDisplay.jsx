@@ -27,7 +27,7 @@ const WeatherDisplay = ({weatherData, toggle, latlng})=>{
            
             <div className="flex flex-col">
             <DetailInfo current={weatherData.list[0]} detail={weatherData} city={weatherData.city.name} toggle={toggle} metric={"°C"}/>
-            <Chart weatherData={weatherData} getWeatherIcon= {getWeatherIcon} metric={"°C"} toggle={toggle}/>
+            <Chart weatherData={weatherData} current={weatherData.list[0]} getWeatherIcon= {getWeatherIcon} metric={"°C"} toggle={toggle}/>
             <ForecastWeather toggle={toggle} forecast={weatherData.list.filter((item)=>item.dt_txt.includes("00:00:00"))} city={weatherData.city.name} metric={"°C"} getWeatherIcon={getWeatherIcon} />
             </div>
             </div>

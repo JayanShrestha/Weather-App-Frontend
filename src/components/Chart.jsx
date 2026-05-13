@@ -24,8 +24,8 @@ ChartJS.register(
     Legend
 );
 
-const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
-    const date = new Date();
+const Chart = ({ weatherData, metric, toggle})=>{
+    const date = new Date(weatherData.list[0].dt*1000);
     const  now = (date.toISOString().split("T")[0]);
     const temp = !toggle?metric:"°F";
     
@@ -58,7 +58,7 @@ const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
             };
         }
         return null;
-    },[toggle, now]);
+    },[toggle,weatherData, temp, now]);
    const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -104,7 +104,7 @@ const Chart = ({ weatherData, getWeatherIcon, metric, toggle})=>{
         } },
       tooltip: {
         callbacks: {
-          label: (ctx) => `Temperature: ${ctx.raw} ${temp}`,
+          label: (ctx) => ` Current Temperature: ${ctx.raw} ${temp}`,
         },
       },
     },
