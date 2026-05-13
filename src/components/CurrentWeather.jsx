@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 import toFahrenheit from "./Hooks/getFahrenheit";
 
 const CurrentWeather = ({current, city, country, metric, getWeatherIcon, toggle })=>{
-    const temp = current?Math.round(current.main.temp):0;
+    if(!current) return null;
+    const temp = Math.round(current.main.temp);
     const fahrenheit =Math.round(toFahrenheit(temp));
     const date = new Date(current.dt*1000);
-     if(!current) return null;
     return(
         <AnimatePresence mode="wait">
             <motion.div
-            key={city}
+
             initial={{opacity: 0, y: 20, scale: 0.98}}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
