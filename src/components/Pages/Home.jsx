@@ -1,5 +1,4 @@
 import Header from "../Header";
-import GoogleMap from "../GoogleMap";
 import Weather from "../Weather";
 import Footer from "../Footer";
 
